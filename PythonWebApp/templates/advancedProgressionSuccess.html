@@ -1,0 +1,186 @@
+<html>
+    <center>
+        <head>
+            <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,,500,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/open-iconic-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ionicons.min.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.timepicker.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/icomoon.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+    .progressbar {
+  margin: 0;
+  padding: 0;
+  counter-reset: step;
+}
+.progressbar li {
+  list-style-type: none;
+  width: 25%;
+  float: left;
+  font-size: 12px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  color: #7d7d7d;
+}
+.progressbar li:before {
+  width: 30px;
+  height: 30px;
+  content: counter(step);
+  counter-increment: step;
+  line-height: 30px;
+  border: 2px solid #7d7d7d;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: white;
+}
+.progressbar li:after {
+  width: 100%;
+  height: 2px;
+  content: '';
+  position: absolute;
+  background-color: #7d7d7d;
+  top: 15px;
+  left: -50%;
+  z-index: -1;
+}
+
+.progressbar li:first-child:after {
+  content: none;
+}
+.progressbar li.activeBar {
+  color: #6a28ff;
+}
+.progressbar li.activeBar:before {
+  border-color: #6a28ff;
+  background-color: #6a28ff;
+  color: white;
+}
+.progressbar li.activeBar + li:after {
+  background-color: #6a28ff;
+}
+
+@-webkit-keyframes uparrow {
+  0% { -webkit-transform: translateY(0); opacity: 0.4 }
+  100% { -webkit-transform: translateY(-0.4em); opacity: 0.9 }
+}
+@-webkit-keyframes downarrow {
+  0% { -webkit-transform: translateY(0); opacity: 0.4 }
+  100% { -webkit-transform: translateY(0.4em); opacity: 0.9 }
+}
+
+.arrow {
+  border-color:transparent;
+  border-style:solid;
+  border-width:0 5em;
+  display:block;
+  height:0;
+  margin:3em auto;
+  opacity:0.4;
+  text-indent:-9999px;
+  transform-origin: 50% 50%;
+  width:0%;
+}
+
+.up {
+  -webkit-animation: uparrow 0.6s infinite alternate ease-in-out;
+  border-bottom:5em solid red;
+}
+
+.down {
+  -webkit-animation: downarrow 0.6s infinite alternate ease-in-out;
+  border-top:5em solid green;
+}
+
+.noChange {
+    width: 20%;
+    height: 20px;
+
+    background-color: gray;
+}
+</style>
+
+    </head>
+
+    <body>
+
+<div class="container" id='upArrowFinal'>
+    <center>
+        <h1>Your Results</h1>
+        <a class="arrow up"></a>
+        <h4>{{absintvar}}% increase in progression towards suicidality</h4>
+    </center>
+</div>
+
+<div class="container" id='downArrowFinal'>
+    <center>
+        <h1>Your Results</h1>
+        <a class="arrow down"></a>
+        <h4>{{absintvar}}% decrease in progression towards suicidality</h4>
+    </center>
+</div>
+
+<div class="container" id='noChangeID'>
+    <center>
+        <h1>Your Results</h1>
+        <a class="noChange"></a>
+        <h4>No change in progression towards suicidality</h4>
+    </center>
+</div>
+
+<br>
+
+    <div class="container">
+      <h1>What's next?</h1>
+      <br>
+        <ul class="progressbar">
+            <li id='barOne' class='activeBar'>Initial Analysis</li>
+            <li id='barTwo' class='activeBar'>Baseline Analysis</li>
+            <li id='barThree'>Progression Analysis</li>
+            <li id='barFive'>Professional Support</li>
+        </ul>
+        <br>
+        <p>You've completed the initial and baseline analyses. Now, navigate to the progression analysis to accurately determine your friend's
+        current state upon a psychologist state scale. </p>
+    </div>
+
+
+    </body>
+
+    <script>
+        var intvar = {{intvar}};
+
+        if (intvar > 0.0) {
+            document.getElementById('upArrowFinal').style.display = "block";
+            document.getElementById('downArrowFinal').style.display = "none";
+            document.getElementById('noChangeID').style.display = "none";
+
+        } else if (intvar < 0.0) {
+            document.getElementById('downArrowFinal').style.display = "block";
+            document.getElementById('upArrowFinal').style.display = "none";
+            document.getElementById('noChangeID').style.display = "none";
+        } else if (intvar == 0.0) {
+            document.getElementById('downArrowFinal').style.display = "none";
+            document.getElementById('upArrowFinal').style.display = "none";
+            document.getElementById('noChangeID').style.display = "block";
+        }
+    </script>
+
+    </center>
+</html>
